@@ -1,0 +1,18 @@
+body {
+    background-color: black;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#nav {
+    background-color: skyblue;
+    display: flex;
+    justify-content: space-around;
+}
+
+#container {
+    background-color: rgb(104, 189, 132);
+}
+
