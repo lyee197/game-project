@@ -70,7 +70,7 @@ class Runner {
         if (this.direction.right) {
             this.x += this.speed
             if (this.x + this.width >= game.width) {
-                this.x = game.widtsh - this.width
+                this.x = game.width - this.width
             }
         }
     }
@@ -96,10 +96,10 @@ class Wall {
 
 let player = new Runner(50, 350, 'red', 8, 8)
 let end = new Runner(740, 350, 'blue', 8, 8)
-let frontT = new Wall(50, 25, 'purple', 5, 310)
-let frontB = new Wall(50, 375, 'purple', 5, 300)
-let backT = new Wall( 740, 25, 'purple',5, 310)
-let backB = new Wall( 740, 375, 'purple', 5, 305)
+let frontT = new Wall(50, 25, 'red', 5, 310)
+let frontB = new Wall(50, 375, 'red', 5, 300)
+let backT = new Wall( 740, 25, 'red',5, 310)
+let backB = new Wall( 740, 375, 'red', 5, 305)
 let topW = new Wall(50, 25, 'purple', 690, 5)
 let botW = new Wall(50, 675, 'purple', 690, 5)
 let wallOne = new Wall(100, 70,'red', 5, 310)
@@ -109,32 +109,87 @@ let wallFour = new Wall(245, 70,'purple', 200, 5)
 let wallFive = new Wall(245, 70,'red', 5, 45)
 let wallSix = new Wall(245, 110,'purple', 245, 5)
 let wallSeven = new Wall(490, 25,'red', 5, 90)
-let wallEight = new Wall(100, 425,'purple', 250,5)
-let wallNine = new Wall(100, 375,'red', 50, 5)
+let wallEight = new Wall(100, 425,'purple', 245,5)
+let wallNine = new Wall(100, 375,'purple', 50, 5)
 let wallTen = new Wall(150, 330,'purple', 50, 5)
 let wallEleven = new Wall(150, 115,'red', 5, 220)
-let wallTwelve = new Wall(195, 330,'purple', 5, 195)
-let wallThirteen = new Wall(100, 475,'red', 50, 5)
-let wallFourteen = new Wall(245, 155,'purple', 5, 275)
-// let wallFifteen = new Wall(,,'purple',,)
-// let wallSixteen = new Wall(,,'purple',,)
-// let wallSeventeen = new Wall(,,'purple',,)
-// let wallEighteen = new Wall(,,'purple',,)
-// let wallNineteen = new Wall(,,'purple',,)
-// let wallTwenty = new Wall(,,'purple',,)
-// let wallTwentyone = new Wall(,,'purple',,)
-// let wallTwentyTwo = new Wall(,,'purple',,)
-// let wallTwentyThree = new Wall(,,'purple',,)
-// let wallTwentyFour = new Wall(,,'purple',,)
-// let wallTwentyFive = new Wall(,,'purple',,)
-// let wallTwentySix = new Wall(,,'purple',,)
+let wallTwelve = new Wall(195, 330,'red', 5, 195)
+let wallThirteen = new Wall(100, 475,'purple', 50, 5)
+let wallFourteen = new Wall(245, 155,'red', 5, 275)
+let wallFifteen = new Wall(145, 475,'red', 5, 105)
+let wallSixteen = new Wall(100, 520,'red', 5, 110)
+let wallSeventeen = new Wall(100, 625,'purple', 190, 5)
+let wallEighteen = new Wall(145, 575,'purple', 100, 5)
+let wallNineteen = new Wall(245, 475,'red', 5, 105)
+let wallTwenty = new Wall(245, 475,'purple', 155, 5)
+let wallTwentyone = new Wall(290, 515,'red', 5, 115)
+let wallTwentyTwo = new Wall(290, 155,'red', 5, 225)
+let wallTwentyThree = new Wall(290, 380,'purple', 110, 5)
+let wallTwentyFour = new Wall(345, 425,'red', 5, 50)
+let wallTwentyFive = new Wall(395, 380,'red', 5, 250)
+let wallTwentySix = new Wall(290, 155,'purple', 245, 5)
+let wallTwentySeven = new Wall(535, 65,'red', 5, 50)
+let wallTwentyEight = new Wall(535, 110,'purple', 160, 5)
+let wallTwentyNine = new Wall(580, 65,'purple', 160, 5)
+let wallThirty = new Wall(580, 110,'red', 5, 180)
+let wallThirtyOne = new Wall(630, 155,'purple', 115, 5)
+let wallThirtyTwo = new Wall(535, 155,'red', 5, 180)
+let wallThirtyThree = new Wall(580, 200,'purple', 115, 5)
+let wallThirtyFour = new Wall(580, 330,'purple', 165, 5)
+let wallThirtyFive = new Wall(630, 250,'purple', 115, 5)
+let wallThirtySix = new Wall(535, 290,'purple', 165, 5)
+let wallThirtySeven = new Wall(580, 330, 'red', 5, 95)
+let wallThirtyEight = new Wall(340, 515, 'red', 5, 165)
+let wallThirtyNine = new Wall(290, 515, 'purple', 55, 5)
+let wallFourty = new Wall(445, 380, 'purple', 135, 5)
+let wallFourtyOne = new Wall(400, 625, 'purple', 295, 5)
+let wallFourtyTwo = new Wall(445, 380, 'red', 5, 205)
+let wallFourtyThree = new Wall(490, 195, 'red', 5, 190)
+let wallFourtyFour = new Wall(490, 425, 'red', 5, 205)
+let wallFourtyFive = new Wall(535, 380, 'red', 5, 205)
+let wallFourtySix = new Wall(580, 580, 'purple', 160, 5)
+let wallFourtySeven = new Wall(580, 465, 'red', 5, 160)
+let wallFourtyEight = new Wall(630, 330, 'red', 5, 210)
+let wallFourtyNine = new Wall(630, 535, 'purple', 60, 5)
+let wallFifty = new Wall(685, 375, 'red', 5, 115)
+let wallFiftyOne = new Wall(685, 375, 'purple', 60, 5)
+let wallFiftyTwo = new Wall(340, 335, 'purple', 150, 5)
+// let wallFiftyThree = new Wall(, , '', , )
+// let wallFiftyFour = new Wall(, , '', , )
+// let wallFiftyFive = new Wall(, , '', , )
+// let wallFiftySix = new Wall(, , '', , )
+// let wallFiftySeven = new Wall(, , '', , )
 
+// wall creation function should produce enough walls to fill canvas
+// think of some mathematical way of creating a bunch of walls
+// walls need different x/y and width/height
+// if wallWidth > wallHeight then wallColor = purple
+// else wallColor = red
+// 
+// WALL DETECT LOGIC - WALL 
+//if players right edge hits the wall, then playerx = wallX - playerWidth
+//if players left edge hits the wall, then playerx = wallX + wallWidth
+//if players top edge hits the wall, then playery = wallY + wallheight
+//if players bottom edge hits the wall, then playery = wallY - playerheight
 
-
-let walls = []
+let walls = [
+    wallOne, wallTwo, wallThree, wallFour, wallFive,
+    wallSix, wallSeven, wallEight, wallNine, wallTen,
+    wallEleven, wallTwelve, wallThirteen, wallFourteen, wallFifteen,
+    wallSixteen, wallSeventeen, wallEighteen, wallNineteen, wallTwenty,
+    wallTwentyone, wallTwentyTwo, wallTwentyThree, wallTwentyFour, wallTwentyFive,
+    wallTwentySix, wallTwentySeven, wallTwentyEight, wallTwentyNine, wallThirty,
+    wallThirtyOne, wallThirtyTwo]
 // fill array with new walls
 // itterate over array and render
 // use 'forEach[i]' on the array
+// walls[i]
+// const drawWalls = () => {
+//  for (let i = 0; i < walls.length; i++) {
+//      walls[i].render()
+//      runner.detectWall(walls[i])
+//  }
+//}
 
 const stopGameLoop = () => {clearInterval(gameInterval)}
 
@@ -173,7 +228,49 @@ const gameLoop = () => {
     wallTwelve.render()
     wallThirteen.render()
     wallFourteen.render()
-    // wallFifteen.render()
+    wallFifteen.render()
+    wallSixteen.render()
+    wallSeventeen.render()
+    wallEighteen.render()
+    wallNineteen.render()
+    wallTwenty.render()
+    wallTwentyone.render()
+    wallTwentyTwo.render()
+    wallTwentyThree.render()
+    wallTwentyFour.render()
+    wallTwentyFive.render()
+    wallTwentySix.render()
+    wallTwentySeven.render()
+    wallTwentyEight.render()
+    wallTwentyNine.render()
+    wallThirty.render()
+    wallThirtyOne.render()
+    wallThirtyTwo.render()
+    wallThirtyThree.render()
+    wallThirtyFour.render()
+    wallThirtyFive.render()
+    wallThirtySix.render()
+    wallThirtySeven.render()
+    wallThirtyEight.render()
+    wallThirtyNine.render()
+    wallFourty.render()
+    wallFourtyOne.render()
+    wallFourtyTwo.render()
+    wallFourtyThree.render()
+    wallFourtyFour.render()
+    wallFourtyFive.render()
+    wallFourtySix.render()
+    wallFourtySeven.render()
+    wallFourtyEight.render()
+    wallFourtyNine.render()
+    wallFifty.render()
+    wallFiftyOne.render()
+    wallFiftyTwo.render()
+    // wallFiftyThree.render()
+    // wallFiftyFour.render()
+    // wallFiftyFive.render()
+    // wallFiftySix.render()
+    // wallFiftySeven.render()
     player.movePlayer()
 }
 // this was our movement
