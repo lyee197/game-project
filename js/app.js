@@ -154,10 +154,10 @@ let wallFourtyNine = new Wall(630, 535, 'purple', 60, 5)
 let wallFifty = new Wall(685, 375, 'red', 5, 115)
 let wallFiftyOne = new Wall(685, 375, 'purple', 60, 5)
 let wallFiftyTwo = new Wall(340, 335, 'purple', 150, 5)
-// let wallFiftyThree = new Wall(, , '', , )
-// let wallFiftyFour = new Wall(, , '', , )
-// let wallFiftyFive = new Wall(, , '', , )
-// let wallFiftySix = new Wall(, , '', , )
+let wallFiftyThree = new Wall(290, 290, 'purple', 160, 5)
+let wallFiftyFour = new Wall(445, 250, 'red', 5, 45)
+let wallFiftyFive = new Wall(340, 245, 'purple', 110, 5)
+let wallFiftySix = new Wall(340, 195, 'purple', 150, 5)
 // let wallFiftySeven = new Wall(, , '', , )
 
 // wall creation function should produce enough walls to fill canvas
@@ -172,6 +172,10 @@ let wallFiftyTwo = new Wall(340, 335, 'purple', 150, 5)
 //if players top edge hits the wall, then playery = wallY + wallheight
 //if players bottom edge hits the wall, then playery = wallY - playerheight
 
+const detectWall = (taco) => {
+
+}
+
 let walls = [
     wallOne, wallTwo, wallThree, wallFour, wallFive,
     wallSix, wallSeven, wallEight, wallNine, wallTen,
@@ -179,7 +183,22 @@ let walls = [
     wallSixteen, wallSeventeen, wallEighteen, wallNineteen, wallTwenty,
     wallTwentyone, wallTwentyTwo, wallTwentyThree, wallTwentyFour, wallTwentyFive,
     wallTwentySix, wallTwentySeven, wallTwentyEight, wallTwentyNine, wallThirty,
-    wallThirtyOne, wallThirtyTwo]
+    wallThirtyOne, wallThirtyTwo, wallThirtyThree, wallThirtyFour, wallThirtyFive,
+    wallThirtySix, wallThirtySeven, wallThirtyEight, wallThirtyNine, wallFourty,
+    wallFourtyOne, wallFourtyTwo, wallFourtyThree, wallFourtyFour, wallFourtyFive,
+    wallFourtySix, wallFourtySeven, wallFourtyEight, wallFourtyNine, wallFifty,
+    wallFiftyOne, wallFiftyTwo, wallFiftyThree, wallFiftyFour, wallFiftyFive,
+    wallFiftySix, frontT, frontB, backT, backB,
+    topW, botW]
+// Runner.detectWall(walls[i])]
+const drawWalls = () => {
+    for (let i = 0; i < walls.length; i++) {
+        walls[i].render()
+        console.log('this wall was rendered: ' + walls[i])
+        // Runner.detectWall(walls[i])
+    }
+}
+
 // fill array with new walls
 // itterate over array and render
 // use 'forEach[i]' on the array
@@ -208,69 +227,7 @@ const gameLoop = () => {
         end.render()
     }
     player.render()
-    frontB.render()
-    frontT.render()
-    backT.render()
-    backB.render()
-    topW.render()
-    botW.render()
-    wallOne.render() 
-    wallTwo.render()
-    wallThree.render()
-    wallFour.render()
-    wallFive.render()
-    wallSix.render()
-    wallSeven.render()
-    wallEight.render()
-    wallNine.render()
-    wallTen.render()
-    wallEleven.render()
-    wallTwelve.render()
-    wallThirteen.render()
-    wallFourteen.render()
-    wallFifteen.render()
-    wallSixteen.render()
-    wallSeventeen.render()
-    wallEighteen.render()
-    wallNineteen.render()
-    wallTwenty.render()
-    wallTwentyone.render()
-    wallTwentyTwo.render()
-    wallTwentyThree.render()
-    wallTwentyFour.render()
-    wallTwentyFive.render()
-    wallTwentySix.render()
-    wallTwentySeven.render()
-    wallTwentyEight.render()
-    wallTwentyNine.render()
-    wallThirty.render()
-    wallThirtyOne.render()
-    wallThirtyTwo.render()
-    wallThirtyThree.render()
-    wallThirtyFour.render()
-    wallThirtyFive.render()
-    wallThirtySix.render()
-    wallThirtySeven.render()
-    wallThirtyEight.render()
-    wallThirtyNine.render()
-    wallFourty.render()
-    wallFourtyOne.render()
-    wallFourtyTwo.render()
-    wallFourtyThree.render()
-    wallFourtyFour.render()
-    wallFourtyFive.render()
-    wallFourtySix.render()
-    wallFourtySeven.render()
-    wallFourtyEight.render()
-    wallFourtyNine.render()
-    wallFifty.render()
-    wallFiftyOne.render()
-    wallFiftyTwo.render()
-    // wallFiftyThree.render()
-    // wallFiftyFour.render()
-    // wallFiftyFive.render()
-    // wallFiftySix.render()
-    // wallFiftySeven.render()
+    drawWalls()
     player.movePlayer()
 }
 // this was our movement
@@ -301,7 +258,6 @@ document.addEventListener('keyup', (e) => {
         player.unsetDirection(e.key)
     }
 })
-
 
 const detectHit = () => {
     if (player.x < end.x + end.width
