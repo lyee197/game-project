@@ -209,14 +209,13 @@ const drawWalls = () => {
 //      runner.detectWall(walls[i])
 //  }
 //}
-
+drawWalls()
 const stopGameLoop = () => {clearInterval(gameInterval)}
 
 document.addEventListener('DOMContentLoaded', function () {
     // document.addEventListener('keydown', movementHandler)
     gameInterval
 })
-
 const gameLoop = () => {
     if (end.alive) {
         detectHit()
@@ -227,7 +226,7 @@ const gameLoop = () => {
         end.render()
     }
     player.render()
-    drawWalls()
+    // drawWalls()
     player.movePlayer()
 }
 // this was our movement
