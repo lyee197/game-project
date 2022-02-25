@@ -22,7 +22,7 @@ class Runner {
         this.height = height,
         this.width = width,
         this.alive = true,
-        this.speed = 15
+        this.speed = 2
         this.render = function () {
             ctx.fillStyle = this.color
             ctx.fillRect(this.x, this.y, this.width, this.height)
@@ -172,8 +172,19 @@ let wallFiftySix = new Wall(340, 195, 'purple', 150, 5)
 //if players top edge hits the wall, then playery = wallY + wallheight
 //if players bottom edge hits the wall, then playery = wallY - playerheight
 
-const detectWall = (taco) => {
-
+const detectWall = () => {
+    if (Runner.x <= Wall.x) {
+        Runner.x = Wall.x - Runner.width
+    } 
+    if (Runner.x + Runner.width >= Wall.width) {
+        Runner.x = Wall.x + Wall.width
+    }
+    if (Runner.y <= Wall.y) {
+        Runner.y = Wall.y + Wall.height
+    }
+    if (Runner.y + Runner.height >= Wall.height) {
+        Runner.y = Wall.y - Runner.height
+    }
 }
 
 let walls = [
@@ -192,11 +203,14 @@ let walls = [
     topW, botW]
 // Runner.detectWall(walls[i])]
 const drawWalls = () => {
-    for (let i = 0; i < walls.length; i++) {
-        walls[i].render()
-        console.log('this wall was rendered: ' + walls[i])
+    // if (wallsBuilt !== true) {
+        for (let i = 0; i < walls.length; i++) {
+            walls[i].render()
+        // console.log('this wall was rendered: ' + walls[i])
         // Runner.detectWall(walls[i])
-    }
+        }
+        // wallsBuilt = true
+    // } 
 }
 
 // fill array with new walls
@@ -209,24 +223,28 @@ const drawWalls = () => {
 //      runner.detectWall(walls[i])
 //  }
 //}
-drawWalls()
+// drawWalls()
 const stopGameLoop = () => {clearInterval(gameInterval)}
 
 document.addEventListener('DOMContentLoaded', function () {
     // document.addEventListener('keydown', movementHandler)
     gameInterval
 })
+
+let wallsBuilt = false
+
 const gameLoop = () => {
     if (end.alive) {
         detectHit()
     }
     ctx.clearRect(0, 0, game.width, game.height)
+    drawWalls()
     movement.textContent = player.x + ' , ' + player.y
     if (end.alive) {
         end.render()
     }
+    detectWall()
     player.render()
-    // drawWalls()
     player.movePlayer()
 }
 // this was our movement
