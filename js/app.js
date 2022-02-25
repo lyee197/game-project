@@ -54,11 +54,19 @@ class Runner {
             if (this.y <= 0) {
                 this.y = 0
             }
+            if (this.y <= Wall.y) {
+                console.log('bottom')
+                this.y = Wall.y + Wall.height
+            }
         }
         if (this.direction.left) {
             this.x -= this.speed
             if (this.x <= 0) {
                 this.x = 0
+            }
+            if (this.x <= Wall.x) {
+                console.log('right')
+                this.x = Wall.x - this.width
             }
         }
         if (this.direction.down) {
@@ -66,11 +74,19 @@ class Runner {
             if (this.y + this.height >= game.height) {
                 this.y = game.height - this.height
             }
+            if (this.y + this.height >= Wall.height) {
+                console.log('top')
+                this.y = Wall.y - this.height
+            }
         }
         if (this.direction.right) {
             this.x += this.speed
             if (this.x + this.width >= game.width) {
                 this.x = game.width - this.width
+            }
+            if (this.x + this.width >= Wall.width) {
+                console.log('left')
+                this.x = Wall.x + Wall.width
             }
         }
     }
@@ -172,20 +188,36 @@ let wallFiftySix = new Wall(340, 195, 'purple', 150, 5)
 //if players top edge hits the wall, then playery = wallY + wallheight
 //if players bottom edge hits the wall, then playery = wallY - playerheight
 
-const detectWall = () => {
-    if (Runner.x <= Wall.x) {
-        Runner.x = Wall.x - Runner.width
-    } 
-    if (Runner.x + Runner.width >= Wall.width) {
-        Runner.x = Wall.x + Wall.width
-    }
-    if (Runner.y <= Wall.y) {
-        Runner.y = Wall.y + Wall.height
-    }
-    if (Runner.y + Runner.height >= Wall.height) {
-        Runner.y = Wall.y - Runner.height
-    }
-}
+// const detectWall = () => {
+//     if (Runner.direction.right){
+//         // Runner -= Runner.speed
+//         if (Runner.x <= Wall.x) {
+//             console.log('right')
+//             Runner.x = Wall.x - Runner.width
+//         }
+//     }
+//     if (Runner.direction.left){
+//         // Runner -= Runner.speed
+//         if (Runner.x + Runner.width >= Wall.width) {
+//             console.log('left')
+//             Runner.x = Wall.x + Wall.width
+//         }
+//     } 
+//     if (Runner.direction.down){
+//         // Runner -= Runner.speed
+//         if (Runner.y <= Wall.y) {
+//             console.log('bottom')
+//             Runner.y = Wall.y + Wall.height
+//         }
+//     }
+//     if (Runner.direction.up){
+//         // Runner -= Runner.speed
+//         if (Runner.y + Runner.height >= Wall.height) {
+//             console.log('top')
+//             Runner.y = Wall.y - Runner.height
+//         }
+//     }
+// }
 
 let walls = [
     wallOne, wallTwo, wallThree, wallFour, wallFive,
@@ -243,7 +275,7 @@ const gameLoop = () => {
     if (end.alive) {
         end.render()
     }
-    detectWall()
+    // detectWall()
     player.render()
     player.movePlayer()
 }
