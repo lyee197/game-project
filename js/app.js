@@ -23,6 +23,7 @@ class Runner {
         this.width = width,
         this.alive = true,
         this.speed = 2
+        this.boost = 5
         this.render = function () {
             ctx.fillStyle = this.color
             ctx.fillRect(this.x, this.y, this.width, this.height)
@@ -31,7 +32,8 @@ class Runner {
             up: false,
             down: false,
             right: false,
-            left: false
+            left: false,
+            fast: false
         }
     }
     setDirection = function (key) {
@@ -40,6 +42,7 @@ class Runner {
         if (key.toLowerCase() == 'a') this.direction.left = true
         if (key.toLowerCase() == 's') this.direction.down = true
         if (key.toLowerCase() == 'd') this.direction.right = true
+        if (key.toLowerCase() == ' ') this.direction.fast = true
     }
     unsetDirection = function (key) {
         console.log('the key pressed is', key)
@@ -47,6 +50,7 @@ class Runner {
         if (key.toLowerCase() == 'a') this.direction.left = false
         if (key.toLowerCase() == 's') this.direction.down = false
         if (key.toLowerCase() == 'd') this.direction.right = false
+        if (key.toLowerCase() == ' ') this.direction.fast = false        
     }
     movePlayer = function () {
         if (this.direction.up) {
@@ -54,51 +58,116 @@ class Runner {
             if (this.y <= 0) {
                 this.y = 0
             }
-            if (this.y <= Wall.y) {
-                console.log('bottom')
-                this.y = Wall.y + Wall.height
-            }
+            // if (this.y <= Wall.y) {
+            //     console.log('bottom')
+            //     this.y = Wall.y + Wall.height
+            // }
         }
         if (this.direction.left) {
             this.x -= this.speed
             if (this.x <= 0) {
                 this.x = 0
             }
-            if (this.x <= Wall.x) {
-                console.log('right')
-                this.x = Wall.x - this.width
-            }
+            // if (this.x <= Wall.x) {
+            //     console.log('right')
+            //     this.x = Wall.x - this.width
+            // }
         }
         if (this.direction.down) {
             this.y += this.speed
             if (this.y + this.height >= game.height) {
                 this.y = game.height - this.height
             }
-            if (this.y + this.height >= Wall.height) {
-                console.log('top')
-                this.y = Wall.y - this.height
-            }
+            // if (this.y + this.height >= Wall.height) {
+            //     console.log('top')
+            //     this.y = Wall.y - this.height
+            // }
         }
         if (this.direction.right) {
             this.x += this.speed
             if (this.x + this.width >= game.width) {
                 this.x = game.width - this.width
             }
-            if (this.x + this.width >= Wall.width) {
-                console.log('left')
-                this.x = Wall.x + Wall.width
-            }
+            // if (this.x + this.width >= Wall.width) {
+            //     console.log('left')
+            //     this.x = Wall.x + Wall.width
+            // }
         }
+    }
+    // wa = wall array
+    detectWall = function (wa) {
+        for (let i = 0; i < wa.length; i++) {
+            // if (this.direction.right){
+                // Runner -= Runner.speed
+                // The runner's x (top left or top) needs to hit the right of the wall
+                // The left of the wall is x so if this(runner).x is Runners left
+                // the right side of wall is wall(wa).x + width
+            if (this.x  < wa[i].x + wa[i].width
+                // 
+                && this.x + this.width > wa[i].x 
+                //
+                && this.y  < wa[i].y + wa[i].height 
+                //
+                && this.y + this.height > wa[i].y) {
+                console.log('right')
+                // if (this.x === wa[i].x + wa[i].width) {
+                //     console.log('hit1')
+                //     this.x = 0
+                // } else if (this.x + this.width === wa[i].x) {
+                //     console.log('hit2')
+                //     this.x = 0
+                // } else if (this.y === wa[i].y + wa[i].height) {
+                //     console.log('hit3')
+                //     this.y = 0
+                // } else if (this.y === this.height > wa[i].y) {
+                //     console.log('hit4')
+                //     this.y = 0
+                // }
+            } else {
+                console.log('left ', this.x)
+            }
+            
+
+
+
+
+                // if (this.x === (walls[i].x - this.width) && this.y === walls[i].y - this.height) {
+            // }
+        
+            }
+
+// if (this.direction.left){
+        //     // Runner -= Runner.speed
+        //     if (this.x + this.width >= Wall.width) {
+        //         console.log('left')
+        //         this.x = Wall.x + Wall.width
+        //     }
+        // } 
+        // if (this.direction.down){
+        //     // Runner -= Runner.speed
+        //     if (this.y <= Wall.y) {
+        //         console.log('bottom')
+        //         this.y = Wall.y + Wall.height
+        //     }
+        // }
+        // if (this.direction.up){
+        //     // Runner -= Runner.speed
+        //     if (this.y + this.height >= Wall.height) {
+        //         console.log('top')
+        //         this.y = Wall.y - this.height
+        //     }
+        // }
     }
 }
 
 class Wall {
-    constructor(x, y, color, width, height) {
+    constructor(x, y, color, width, height, type) {
         this.x = x,
         this.y = y,
         this.color = color,
         this.height = height,
         this.width = width,
+        this.type = type,
         this.alive = true,
         this.render = function () {
             ctx.fillStyle = this.color
@@ -191,7 +260,7 @@ let wallFiftySix = new Wall(340, 195, 'purple', 150, 5)
 // const detectWall = () => {
 //     if (Runner.direction.right){
 //         // Runner -= Runner.speed
-//         if (Runner.x <= Wall.x) {
+//         if (Runner.x <= walls[i].x) {
 //             console.log('right')
 //             Runner.x = Wall.x - Runner.width
 //         }
@@ -219,6 +288,8 @@ let wallFiftySix = new Wall(340, 195, 'purple', 150, 5)
 //     }
 // }
 
+
+
 let walls = [
     wallOne, wallTwo, wallThree, wallFour, wallFive,
     wallSix, wallSeven, wallEight, wallNine, wallTen,
@@ -244,6 +315,9 @@ const drawWalls = () => {
         // wallsBuilt = true
     // } 
 }
+
+console.log('this is wall 14: ' + walls[0].width)
+// console.log('this is wall 14: ' + walls[1].width)
 
 // fill array with new walls
 // itterate over array and render
@@ -277,6 +351,7 @@ const gameLoop = () => {
     }
     // detectWall()
     player.render()
+    player.detectWall(walls)
     player.movePlayer()
 }
 // this was our movement
@@ -303,7 +378,7 @@ document.addEventListener('keydown', (e) => {
 })
 
 document.addEventListener('keyup', (e) => {
-    if (['w','a','s','d'].includes(e.key)) {
+    if (['w','a','s','d',' '].includes(e.key)) {
         player.unsetDirection(e.key)
     }
 })
