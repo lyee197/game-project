@@ -1,4 +1,4 @@
-// console.log('gg, not ez but fun')
+// console.log('gg, not ez but fun') Hello
 
 const game = document.getElementById('gameboard')
 const movement = document.getElementById('movement')
