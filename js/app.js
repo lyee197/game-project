@@ -1,4 +1,4 @@
-// console.log('gg ez')
+// console.log('gg, not ez but fun')
 
 const game = document.getElementById('gameboard')
 const movement = document.getElementById('movement')
@@ -102,61 +102,41 @@ class Runner {
                 // The runner's x (top left or top) needs to hit the right of the wall
                 // The left of the wall is x so if this(runner).x is Runners left
                 // the right side of wall is wall(wa).x + width
-            if (this.x  < wa[i].x + wa[i].width
+            if (this.x  <= wa[i].x + wa[i].width
                 // 
-                && this.x + this.width > wa[i].x 
+                && this.x + this.width >= wa[i].x 
                 //
-                && this.y  < wa[i].y + wa[i].height 
+                && this.y  <= wa[i].y + wa[i].height 
                 //
-                && this.y + this.height > wa[i].y) {
+                && this.y + this.height >= wa[i].y) {
                 console.log('right')
-                // if (this.x === wa[i].x + wa[i].width) {
-                //     console.log('hit1')
-                //     this.x = 0
-                // } else if (this.x + this.width === wa[i].x) {
-                //     console.log('hit2')
-                //     this.x = 0
-                // } else if (this.y === wa[i].y + wa[i].height) {
-                //     console.log('hit3')
-                //     this.y = 0
-                // } else if (this.y === this.height > wa[i].y) {
-                //     console.log('hit4')
-                //     this.y = 0
-                // }
+//----------------------------------- This Works! ------------------------------------------
+                if ((this.x + 2) <= wa[i].x + wa[i].width) {
+                    console.log('hit1')
+                    // hit1 works runner into right wall
+                    this.x -= 2
+                }
+                if (this.x + this.width >= wa[i].x) {
+                    console.log('hit2')
+                    // this will get runner to hit the left side of wall
+                    this.x += 2
+                }
+                if ((this.y + 2) <= wa[i].y + wa[i].height) {
+                    console.log('hit3')
+                       // this will get runner to hit the bottom of wall
+                    this.y -= 2
+                }
+                if (this.y + this.height >= wa[i].y) {
+                    console.log('hit4')
+                    // this will get runner to hit the top of wall
+                    this.y += 2
+                }
             } else {
                 console.log('left ', this.x)
             }
-            
-
-
-
-
                 // if (this.x === (walls[i].x - this.width) && this.y === walls[i].y - this.height) {
             // }
-        
             }
-
-// if (this.direction.left){
-        //     // Runner -= Runner.speed
-        //     if (this.x + this.width >= Wall.width) {
-        //         console.log('left')
-        //         this.x = Wall.x + Wall.width
-        //     }
-        // } 
-        // if (this.direction.down){
-        //     // Runner -= Runner.speed
-        //     if (this.y <= Wall.y) {
-        //         console.log('bottom')
-        //         this.y = Wall.y + Wall.height
-        //     }
-        // }
-        // if (this.direction.up){
-        //     // Runner -= Runner.speed
-        //     if (this.y + this.height >= Wall.height) {
-        //         console.log('top')
-        //         this.y = Wall.y - this.height
-        //     }
-        // }
     }
 }
 
@@ -177,7 +157,7 @@ class Wall {
     }
 }
 
-
+//-----------All the walls and runners
 
 let player = new Runner(50, 350, 'red', 8, 8)
 let end = new Runner(740, 350, 'blue', 8, 8)
@@ -257,39 +237,6 @@ let wallFiftySix = new Wall(340, 195, 'purple', 150, 5)
 //if players top edge hits the wall, then playery = wallY + wallheight
 //if players bottom edge hits the wall, then playery = wallY - playerheight
 
-// const detectWall = () => {
-//     if (Runner.direction.right){
-//         // Runner -= Runner.speed
-//         if (Runner.x <= walls[i].x) {
-//             console.log('right')
-//             Runner.x = Wall.x - Runner.width
-//         }
-//     }
-//     if (Runner.direction.left){
-//         // Runner -= Runner.speed
-//         if (Runner.x + Runner.width >= Wall.width) {
-//             console.log('left')
-//             Runner.x = Wall.x + Wall.width
-//         }
-//     } 
-//     if (Runner.direction.down){
-//         // Runner -= Runner.speed
-//         if (Runner.y <= Wall.y) {
-//             console.log('bottom')
-//             Runner.y = Wall.y + Wall.height
-//         }
-//     }
-//     if (Runner.direction.up){
-//         // Runner -= Runner.speed
-//         if (Runner.y + Runner.height >= Wall.height) {
-//             console.log('top')
-//             Runner.y = Wall.y - Runner.height
-//         }
-//     }
-// }
-
-
-
 let walls = [
     wallOne, wallTwo, wallThree, wallFour, wallFive,
     wallSix, wallSeven, wallEight, wallNine, wallTen,
@@ -354,24 +301,6 @@ const gameLoop = () => {
     player.detectWall(walls)
     player.movePlayer()
 }
-// this was our movement
-// const movementHandler = (e) => {
-    //     switch (e.keyCode) {
-        //         case (87):
-//             player.y -=5
-//             break
-//         case (65):
-//             player.x -=5
-//             break
-//         case (83):
-//             player.y +=5
-//             break
-//         case (68):
-//             player.x +=5
-//             break
-
-//     }
-// }
 
 document.addEventListener('keydown', (e) => {
     player.setDirection(e.key)
@@ -383,24 +312,225 @@ document.addEventListener('keyup', (e) => {
     }
 })
 
+const winMsg = document.querySelector('#win')
+
 const detectHit = () => {
     if (player.x < end.x + end.width
         && player.x + player.width > end.x
         && player.y < end.y + end.height
         && player.y + player.height > end.y) {
             end.alive = false
-            document.getElementById('status').innerText = 'You made it to the end in time! POGGERS'
-            // } else if {player.x < wa}
+            // } else if {player.x < wa
+            winMsg.innerText = 'POGGERS'
         }
     }
     
 let gameInterval = setInterval(gameLoop, 60)
-    // const wallH = () => {
-        //     if (pplayer.x < )
-        // }
-        
-        // const wallV = () => {
-            //     if
-            // }
-            
-            
+
+
+//-----------------------------------------------------------------------------------------------------------------------
+//--------------------------------Code I Tried---------------------------------------------------------------------------
+//-----------------------------------------------------------------------------------------------------------------------
+
+
+//----------------------------------Tried Reverse speed-----------------------------------------------------------------------------------------
+// if (this.x <= wa[i].x + wa[i].width || 
+//     this.x + this.width >= wa[i].x || 
+//     this.y <= wa[i].y + wa[i].height || 
+//     this.y + this.height >= wa[i].y) {
+//     console.log('hit1')
+//     this.speed = -2
+//     // hit1 works runner into right wall
+// }
+
+//----------------------------------Tried changeing location of wall hit-------------------------------------------------------------------------
+// if (this.x <= wa[i].x + wa[i].width) {
+//     console.log('hit1')
+//     // hit1 works runner into right wall
+//     if (this.x + this.width >= wa[i].x) {
+//         console.log('hit2')
+//         // this will get runner to hit the left side of wall
+//         if (this.y <= wa[i].y + wa[i].height) {
+//             console.log('hit3')
+//                // this will get runner to hit the bottom of wall
+//                if (this.y + this.height >= wa[i].y) {
+//                    console.log('hit4')
+//                    // this will get runner to hit the top of wall
+//                    this.y =  wa[i].y - this.height
+//                }
+//             this.y = wa[i].y + wa[i].height
+//         }
+//         this.x = wa[i].x - this.width
+//     }
+//     this.x = wa[i].x + wa[i].width 
+// }
+
+//---------------------------------
+// const detectWall = () => {
+//     if (Runner.direction.right){
+//         // Runner -= Runner.speed
+//         if (Runner.x <= walls[i].x) {
+//             console.log('right')
+//             Runner.x = Wall.x - Runner.width
+//         }
+//     }
+//     if (Runner.direction.left){
+//         // Runner -= Runner.speed
+//         if (Runner.x + Runner.width >= Wall.width) {
+//             console.log('left')
+//             Runner.x = Wall.x + Wall.width
+//         }
+//     } 
+//     if (Runner.direction.down){
+//         // Runner -= Runner.speed
+//         if (Runner.y <= Wall.y) {
+//             console.log('bottom')
+//             Runner.y = Wall.y + Wall.height
+//         }
+//     }
+//     if (Runner.direction.up){
+//         // Runner -= Runner.speed
+//         if (Runner.y + Runner.height >= Wall.height) {
+//             console.log('top')
+//             Runner.y = Wall.y - Runner.height
+//         }
+//     }
+// }
+
+//---------------------
+// if (this.x <= wa[i].x + wa[i].width) {
+//     console.log('hit1')
+//     // hit1 works runner into right wall
+//     // this.x = wa[i].x + wa[i].width
+//     this.direction.left = false
+// }
+// if (this.x + this.width >= wa[i].x) {
+//     console.log('hit2')
+//     // this will get runner to hit the left side of wall
+//     // this.x = wa[i].x - this.width
+//     this.direction.right = false
+// }
+// if (this.y <= wa[i].y + wa[i].height) {
+//     console.log('hit3')
+//        // this will get runner to hit the bottom of wall
+//     // this.y = wa[i].y + wa[i].height
+//     this.direction.up = false
+// }
+// if (this.y + this.height >= wa[i].y) {
+//     console.log('hit4')
+//     // this will get runner to hit the top of wall
+//     // this.y =  wa[i].y - this.height
+//     this.direction.down = false
+// }
+
+//---------------------
+// if (this.x <= wa[i].x + wa[i].width) {
+//     console.log('hit1')
+//     // hit1 works runner into right wall
+//     this.x = wa[i].x + wa[i].width
+// }
+// if (this.x + this.width >= wa[i].x) {
+//     console.log('hit2')
+//     // this will get runner to hit the left side of wall
+//     this.x = wa[i].x - this.width
+// }
+// if (this.y <= wa[i].y + wa[i].height) {
+//     console.log('hit3')
+//        // this will get runner to hit the bottom of wall
+//     this.y = wa[i].y + wa[i].height
+// }
+// if (this.y + this.height >= wa[i].y) {
+//     console.log('hit4')
+//     // this will get runner to hit the top of wall
+//     this.y =  wa[i].y - this.height
+// }
+
+//--------------Stayed up against the corners of the wall
+// if (this.x <= wa[i].x + wa[i].width &&
+//     this.direction.left == true) {
+//     console.log('hit1')
+//     // hit1 works runner into right wall
+//     this.x = wa[i].x + wa[i].width
+// }
+// if (this.x + this.width >= wa[i].x &&
+//     this.direction.right == true) {
+//     console.log('hit2')
+//     // this will get runner to hit the left side of wall
+//     this.x = wa[i].x - this.width
+// }
+// if (this.y <= wa[i].y + wa[i].height &&
+//     this.direction.up == true) {
+//     console.log('hit3')
+//        // this will get runner to hit the bottom of wall
+//     this.y = wa[i].y + wa[i].height
+// }
+// if (this.y + this.height >= wa[i].y &&
+//     this.direction.down == true) {
+//     console.log('hit4')
+//     // this will get runner to hit the top of wall
+//     this.y =  wa[i].y - this.height
+// }
+
+//------------------------
+// if (this.x < wa[i].x + wa[i].width &&
+//     ) {
+//     console.log('hit1')
+//     // hit1 works runner into right wall
+//     this.x = wa[i].x + wa[i].width
+// }
+// if (this.x + this.width > wa[i].x &&
+//     ) {
+//     console.log('hit2')
+//     // this will get runner to hit the left side of wall
+//     this.x = wa[i].x - this.width
+// }
+// if (this.y < wa[i].y + wa[i].height &&
+//     ) {
+//     console.log('hit3')
+//        // this will get runner to hit the bottom of wall
+//     this.y = wa[i].y + wa[i].height
+// }
+// if (this.y + this.height > wa[i].y &&
+//     ) {
+//     console.log('hit4')
+//     // this will get runner to hit the top of wall
+//     this.y =  wa[i].y - this.height
+// }
+
+//-----------------------
+// if (this.direction.left){
+//     // Runner -= Runner.speed
+//     if (this.x + this.width >= Wall.width) {
+//         console.log('left')
+//         this.x = Wall.x + Wall.width
+//     }
+// } 
+// if (this.direction.down){
+//     // Runner -= Runner.speed
+//     if (this.y <= Wall.y) {
+//         console.log('bottom')
+//         this.y = Wall.y + Wall.height
+//     }
+// }
+// if (this.direction.up){
+//     // Runner -= Runner.speed
+//     if (this.y + this.height >= Wall.height) {
+//         console.log('top')
+//         this.y = Wall.y - this.height
+//     }
+// }
+
+//
+// if runner.x 
+// if (this.direction.up == true) {
+//     this.direction.up = false
+// }
+// if (this.direction.left == true) {
+//     this.direction.left = false
+// }
+// if (this.direction.down == true) {
+//     this.direction.down = false
+// }
+// if (this.direction.right == true) {
+//     this.direction.right = false
+// }
