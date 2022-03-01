@@ -16,3 +16,9 @@ body {
     background-color: rgb(104, 189, 132);
 }
 
+#win {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+/* test */
